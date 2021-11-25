@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <style>
+    html,body {
+      margin:0;
+      padding:0;
+      font-family:Arial;
+      font-size:10px;
+    }
+    body {
+      padding: 20px 45px;
+    }
+    </style>
+  </head>
+  <body>
+      <form id="predict" method="POST">
+        <p>Q1. How many pregnancies has the patient had?</p>
+        <label for ="Pregnancies">Quantitiy (between 0 and 17):</label>
+	<input type="number" id="Pregnancies" name="Pregnancies" min="0" max="17">
+        <hr>
+        <p>Q2. What is the blood glucose of the patient?</p>
+        <label for ="Glucose">Number (between 0 and 199):</label>
+	<input type="number" id="Glucose" name="Glucose" min="0" max="199">
+        <hr>
+        <p>Q3. What is the blood pressure of the patient?</p>
+        <label for ="BloodPressure">Number (between 0 and 122):</label>
+	<input type="number" id="BloodPressure" name="BloodPressure" min="0" max="122">
+        <hr>
+        <p>Q4. What is the skin thickness of the patient?</p>
+        <label for ="SkinThickness">Number (between 0 and 99):</label>
+	<input type="number" id="SkinThickness" name="SkinThickness" min="0" max="99">
+        <hr>
+        <p>Q5. What is the insulin level of the patient?</p>
+        <label for ="Insulin">Number (between 0 and 846):</label>
+	<input type="number" id="Insulin" name="Insulin" min="0" max="846">
+        <hr>
+        <p>Q6. What is the BMI of the patient?</p>
+        <label for ="BMI">Number (between 0 and 67.1):</label>
+	<input type="number" step="0.01" id="BMI" name="BMI" min="0" max="67.1">
+        <hr>
+        <p>Q7. What is the Diabetes Pedigree Function of the patient?</p>
+        <label for ="DiabetesPedigreeFunction">Number (between 0 and 2.42):</label>
+	<input type="number" step="0.01" id="DiabetesPedigreeFunction" name="DiabetesPedigreeFunction" min="0" max="2.42">
+        <hr>
+        <p>Q8. What is the age of the patient?</p>
+        <label for ="Age">Number (between 0 and 81):</label>
+	<input type="number" id="Age" name="Age" min="0" max="681">
+        <br><br>
+        <input type="submit" value="Predict!">
+    </form>
+    <hr>
+    <div id="predictionOutcome"></div>
+    <script>
+      $("form#predict").submit(function(event) {
+          event.preventDefault();
+          var allElements=event.target.elements;
+          var json={
+            "Pregnancies":allElements.Pregnancies.value,
+            "Glucose":allElements.Glucose.value,
+            "BloodPressure":allElements.BloodPressure.value,
+            "SkinThickness":allElements.SkinThickness.value,
+            "Insulin":allElements.Insulin.value,
+            "BMI":allElements.BMI.value,
+            "DiabetesPedigreeFunction":allElements.DiabetesPedigreeFunction.value,
+            "Age":allElements.Age.value
+          }
+          var jsonStr=JSON.stringify(json)
+          console.log(jsonStr)
+          $.ajax({
+            url: "/api/predict",
+            data: JSON.parse(jsonStr),
+            method: "GET",
+            success: function(result) {
+                let predictedResult=result;
+                let htmlStr="";
+                if(predictedResult=="Yes") {
+                  htmlStr+="<b>Yes, </b> he/she is likely to have diabetes.";
+                } else if (predictedResult=="No") {
+                  htmlStr+="<b>No, </b> he/she is unlikely to have diabetes.";
+                } else {
+                  htmlStr+="<b>Yikes, </b> something went wrong.";
+                }
+                $("#predictionOutcome").html(htmlStr);
+            },
+            error: function(err) {
+              console.log(err);
+            }
+          });
+          return false
+      });
+    </script>
+  </body>
+</html>
