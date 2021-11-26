@@ -16,28 +16,31 @@
     </style>
   </head>
   <body>
+	<h1>Diabetes Predictor with Scikit Learn</h1>
+	<h2>Based on female Pima Indians from the National Institute of Diabetes and Digestive and Kidney Diseases</h2>
+	<hr>
       <form id="predict" method="POST">
         <p>Q1. How many pregnancies has the patient had?</p>
         <label for ="Pregnancies">Quantitiy (between 0 and 17):</label>
 	<input type="number" id="Pregnancies" name="Pregnancies" min="0" max="17">
         <hr>
-        <p>Q2. What is the blood glucose of the patient?</p>
+        <p>Q2. What is the plasma glucose concentration (mg/dL) of the patient after 2 hours in an oral glucose tolerance test?</p>
         <label for ="Glucose">Number (between 0 and 199):</label>
 	<input type="number" id="Glucose" name="Glucose" min="0" max="199">
         <hr>
-        <p>Q3. What is the blood pressure of the patient?</p>
+        <p>Q3. What is the diastolic blood pressure (mm Hg) of the patient?</p>
         <label for ="BloodPressure">Number (between 0 and 122):</label>
 	<input type="number" id="BloodPressure" name="BloodPressure" min="0" max="122">
         <hr>
-        <p>Q4. What is the skin thickness of the patient?</p>
+        <p>Q4. What is the Triceps skin fold thickness (mm) of the patient?</p>
         <label for ="SkinThickness">Number (between 0 and 99):</label>
 	<input type="number" id="SkinThickness" name="SkinThickness" min="0" max="99">
         <hr>
-        <p>Q5. What is the insulin level of the patient?</p>
+        <p>Q5. What is the 2-Hour serum insulin level (mu U/ml) of the patient?</p>
         <label for ="Insulin">Number (between 0 and 846):</label>
 	<input type="number" id="Insulin" name="Insulin" min="0" max="846">
         <hr>
-        <p>Q6. What is the BMI of the patient?</p>
+        <p>Q6. What is the body mass index (weight in kg/(height in m)^2) of the patient?</p>
         <label for ="BMI">Number (between 0 and 67.1):</label>
 	<input type="number" step="0.01" id="BMI" name="BMI" min="0" max="67.1">
         <hr>
@@ -45,7 +48,7 @@
         <label for ="DiabetesPedigreeFunction">Number (between 0 and 2.42):</label>
 	<input type="number" step="0.01" id="DiabetesPedigreeFunction" name="DiabetesPedigreeFunction" min="0" max="2.42">
         <hr>
-        <p>Q8. What is the age of the patient?</p>
+        <p>Q8. What is the age (years) of the patient?</p>
         <label for ="Age">Number (between 0 and 81):</label>
 	<input type="number" id="Age" name="Age" min="0" max="681">
         <br><br>
